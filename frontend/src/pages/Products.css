@@ -1,0 +1,653 @@
+
+/* =========================
+   PRODUCTS PAGE
+========================= */
+
+.products-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    color: #111827;
+
+    padding-bottom: 50px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.products-header {
+    padding: 40px 5% 20px;
+}
+
+.products-header h1 {
+    margin: 0;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.products-header p {
+    margin-top: 8px;
+
+    color: #6b7280;
+
+    font-size: 16px;
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+.category-container {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 0 5% 25px;
+
+    overflow-x: auto;
+}
+
+
+.category-btn {
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    color: #374151;
+
+    padding: 10px 20px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    white-space: nowrap;
+
+    transition: 0.2s;
+}
+
+
+.category-btn:hover {
+    background: #f3f4f6;
+}
+
+
+.category-btn.active {
+    background: #111827;
+
+    color: white;
+
+    border-color: #111827;
+}
+
+
+/* =========================
+   PRODUCT COUNT
+========================= */
+
+.product-count {
+    padding: 0 5% 20px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+/*
+    5 PRODUCTS PER ROW
+*/
+
+.product-grid {
+
+    width: 90%;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.product-card {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    transition: 0.25s;
+
+    min-width: 0;
+}
+
+
+.product-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =========================
+   PRODUCT IMAGE
+========================= */
+
+.product-image {
+
+    width: 100%;
+
+    height: 220px;
+
+    background: #f3f4f6;
+
+    overflow: hidden;
+}
+
+
+.product-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform 0.3s;
+}
+
+
+.product-card:hover .product-image img {
+
+    transform: scale(1.05);
+
+}
+
+
+/* =========================
+   PRODUCT DETAILS
+========================= */
+
+.product-details {
+
+    padding: 16px;
+}
+
+
+.product-details h2 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description {
+
+    margin: 8px 0;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    height: 40px;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   BOTTOM
+========================= */
+
+.product-bottom {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 15px;
+
+    gap: 10px;
+}
+
+
+/* =========================
+   PRICE
+========================= */
+
+.price {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.product-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* =========================
+   WISHLIST
+========================= */
+
+.wishlist-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e5e7eb;
+
+    background: white;
+
+    color: #6b7280;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+
+.wishlist-btn:hover {
+
+    border-color: #111827;
+
+    color: #111827;
+
+}
+
+
+.wishlist-btn.active {
+
+    color: #ef4444;
+
+    border-color: #fecaca;
+
+    background: #fff1f2;
+}
+
+
+/* =========================
+   CART
+========================= */
+
+.cart-btn {
+
+    height: 38px;
+
+    padding: 0 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #111827;
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.cart-btn:hover {
+
+    background: #374151;
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+
+    position: fixed;
+
+    top: 90px;
+
+    right: 25px;
+
+    width: 350px;
+
+    min-height: 75px;
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.15);
+
+    z-index: 9999;
+
+    animation: toastIn 0.3s ease;
+}
+
+
+/* =========================
+   TOAST IMAGE
+========================= */
+
+.toast-image {
+
+    width: 55px;
+
+    height: 55px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   TOAST CONTENT
+========================= */
+
+.toast-content {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.toast-content strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    color: #111827;
+}
+
+
+.toast-content p {
+
+    margin: 4px 0 0;
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================
+   TOAST CLOSE
+========================= */
+
+.toast-close {
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 22px;
+
+    color: #6b7280;
+
+    cursor: pointer;
+
+    padding: 4px;
+}
+
+
+.toast-close:hover {
+
+    color: #111827;
+
+}
+
+
+/* =========================
+   TOAST ANIMATION
+========================= */
+
+@keyframes toastIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(100px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error {
+
+    width: 90%;
+
+    margin: 20px auto;
+
+    padding: 15px;
+
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   NO PRODUCTS
+========================= */
+
+.no-products {
+
+    width: 90%;
+
+    margin: 60px auto;
+
+    text-align: center;
+}
+
+
+.no-products h2 {
+
+    margin-bottom: 8px;
+}
+
+
+.no-products p {
+
+    color: #6b7280;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* 4 cards */
+
+@media (max-width: 1200px) {
+
+    .product-grid {
+
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* 3 cards */
+
+@media (max-width: 950px) {
+
+    .product-grid {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+    }
+
+}
+
+
+/* 2 cards */
+
+@media (max-width: 650px) {
+
+    .product-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+
+    }
+
+
+    .product-image {
+
+        height: 180px;
+
+    }
+
+
+    .product-details {
+
+        padding: 12px;
+
+    }
+
+}
+
+
+/* 1 card */
+
+@media (max-width: 420px) {
+
+    .product-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
