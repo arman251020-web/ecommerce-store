@@ -29,8 +29,6 @@ function Navbar({
   const links = [
     { label: "Home", path: "/home" },
     { label: "Shop", path: "/products" },
-    { label: "Categories", path: "/categories" },
-    { label: "About", path: "/about" },
   ];
 
   const handleSearchSubmit = (e) => {

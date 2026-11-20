@@ -24,9 +24,6 @@ export default function AdminLayout() {
           <NavLink to="/auth/admin/categories" className={({ isActive }) => `admin-nav-item ${isActive ? "active" : ""}`}>
             🏷️ Categories
           </NavLink>
-          <NavLink to="/auth/admin/orders" className={({ isActive }) => `admin-nav-item ${isActive ? "active" : ""}`}>
-            📑 Orders
-          </NavLink>
           <NavLink to="/auth/admin/users" className={({ isActive }) => `admin-nav-item ${isActive ? "active" : ""}`}>
             👥 Users
           </NavLink>
