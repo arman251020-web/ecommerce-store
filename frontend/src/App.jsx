@@ -10,7 +10,7 @@ import Cart from "./pages/Cart"
 import Wishlist from "./pages/Wishlist";
 import Products from "./pages/Products";
 // Admin Pages
-import AdminRegister from "./pages/AdminRegister";
+
 import AdminLayout from "./pages/AdminLayout";
 import AdminDashboardHome from "./pages/AdminDashboardHome";
 import AdminProducts from "./pages/AdminProducts";
@@ -31,7 +31,7 @@ function App() {
                 <Route path="/wishlist" element={<Wishlist />} />
                 <Route path="/products" element={<Products />}/>
                 {/* Admin Registration */}
-                <Route path="/admin/register" element={<AdminRegister />} />
+              
 
                 {/* Admin Nested Panel (Matches /auth/admin & /admin redirects) */}
                 <Route path="/auth/admin" element={<AdminLayout />}>
