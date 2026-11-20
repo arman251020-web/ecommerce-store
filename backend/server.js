@@ -14,7 +14,7 @@ const cors=require("cors")
 
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://ecommerce-store-1-6jk7.onrender.com",
     credentials: true
 }));
 connectDB();
