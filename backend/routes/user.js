@@ -339,7 +339,7 @@ router.delete("/wishlist/:productid", auth, async (req, res) => {
 
 // PRODUCTS
 
-router.get("/product", auth, async (req, res) => {
+router.get("/product", async (req, res) => {
 
     try {
 
@@ -363,7 +363,7 @@ router.get("/product", auth, async (req, res) => {
     }
 
 });
-router.get("/product/search/:nameid", auth, async (req, res) => {
+router.get("/product/search/:nameid", async (req, res) => {
     try {
         const nameid = req.params.nameid;
         const pro = await product.findOne({name:nameid});
