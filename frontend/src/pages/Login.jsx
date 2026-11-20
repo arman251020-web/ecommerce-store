@@ -126,6 +126,12 @@ function Login() {
                             Register
                         </span>
                     </p>
+                     <p className="auth-switch">
+                        Don't have an account?{" "}
+                        <span onClick={() => navigate("/auth/admin/register")}>
+                            Admin Register
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
