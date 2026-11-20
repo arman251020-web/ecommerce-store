@@ -17,6 +17,7 @@ import AdminProducts from "./pages/AdminProducts";
 import AdminCategories from "./pages/AdminCategories";
 import AdminOrders from "./pages/AdminOrders";
 import AdminUsers from "./pages/AdminUsers";
+import AdminRegister from "./pages/AdminRegister";
 function App() {
     return (
         <BrowserRouter>
@@ -34,6 +35,7 @@ function App() {
 
                 {/* Admin Nested Panel (Matches /auth/admin & /admin redirects) */}
                 <Route path="/auth/admin" element={<AdminLayout />}>
+                    <Route path="/auth/admin/register" element={<AdminRegister />}></Route>
                     <Route index element={<Navigate to="dashboard" replace />} />
                     <Route path="home" element={<Navigate to="dashboard" replace />} />
                     <Route path="dashboard" element={<AdminDashboardHome />} />
