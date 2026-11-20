@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import API_URL from "../api";
 function Navbar({ 
   userAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
   cartCount = 0
@@ -39,7 +39,7 @@ function Navbar({
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:5000/logout", {
+      await fetch(`${API_URL}/logout`, {
         method: "POST",
         credentials: "include",
       });

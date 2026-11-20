@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Admin.css";
-
-const API = "http://localhost:5000/auth/admin";
+import API_URL from "../api"; 
+const API = `${API_URL}/auth/admin`;
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState([]);

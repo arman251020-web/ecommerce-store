@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import API_URL from "../api";
 function AdminRegister() {
     const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ function AdminRegister() {
         setIsError(false);
 
         try {
-            const response = await fetch("http://localhost:5000/auth/admin/register", {
+            const response = await fetch(`${API_URL}/auth/admin/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

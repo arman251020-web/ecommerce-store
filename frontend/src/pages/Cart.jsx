@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "./Cart.css";
-
-const API = "http://localhost:5000";
+import API_URL from "../api";
+const API = `${API_URL}`;
 
 function Cart() {
     const [cart, setCart] = useState(null);

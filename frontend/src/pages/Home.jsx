@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import "./Home.css";
-
+import API_URL from "../api";
 function Home() {
     const navigate = useNavigate();
 

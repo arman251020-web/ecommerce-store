@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import "./Admin.css";
+import API_URL from "../api";
 
-const API = "http://localhost:5000/auth/admin";
+const API = `${API_URL}/auth/admin`;
 
 export default function AdminDashboardHome() {
   const [stats, setStats] = useState({ products: 0, orders: 0, users: 0, categories: 0 });

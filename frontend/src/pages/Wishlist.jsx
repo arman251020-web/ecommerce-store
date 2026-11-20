@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Wishlist.css";
-
-const API = "http://localhost:5000";
+import API_URL from "../api";
+const API = `${API_URL}`;
 
 function Wishlist() {
 

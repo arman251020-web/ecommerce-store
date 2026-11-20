@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Products.css";
 import Navbar from "./Navbar";
-
+import API_URL from "../api";
 function Products() {
 
     // =========================
@@ -49,7 +49,7 @@ function Products() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/auth/user/product",
+                `${API_URL}/auth/user/product`,
                 {
                     credentials: "include"
                 }
@@ -85,7 +85,7 @@ function Products() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/auth/user/category",
+                `${API_URL}/auth/user/category`,
                 {
                     credentials: "include"
                 }
@@ -120,7 +120,7 @@ function Products() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/auth/user/wishlist",
+                `${API_URL}/auth/user/wishlist`,
                 {
                     credentials: "include"
                 }
@@ -213,7 +213,7 @@ function Products() {
         try {
 
             const response = await fetch(
-                `http://localhost:5000/auth/user/wishlist/${productId}`,
+                `${API_URL}/auth/user/wishlist/${productId}`,
                 {
                     method: isWishlisted ? "DELETE" : "POST",
                     credentials: "include"
@@ -267,7 +267,7 @@ function Products() {
         try {
 
             const response = await fetch(
-                "http://localhost:5000/auth/user/cart",
+                `${API_URL}/auth/user/cart`,
                 {
                     method: "POST",
                     headers: {
