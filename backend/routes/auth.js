@@ -28,21 +28,25 @@ router.post("/login",async(req,res)=>{
             });
         }
         
-        if(isemail.role==="user"){
-             const token = jwt.sign(
-            { id: isemail._id,
-                email: isemail.email,
-                role: isemail.role
-            },sercet,{expiresIn: "12h"}
-        );
-        res.cookie("userToken", token, {
-            httpOnly: true,
-            secure: false, 
-            sameSite: "lax",
-            maxAge: 12 * 60 * 60 * 1000
-        });
-            
-        }
+        if (isemail.role === "user") {
+    const token = jwt.sign(
+        {
+            id: isemail._id,
+            email: isemail.email,
+            role: isemail.role
+        },
+        sercet,
+        { expiresIn: "12h" }
+    );
+
+    res.cookie("userToken", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        maxAge: 12 * 60 * 60 * 1000,
+        path: "/"
+    });
+}
 
         //admin
         if(isemail.role==="admin"){
