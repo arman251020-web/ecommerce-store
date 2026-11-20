@@ -1,177 +1,103 @@
+
 import { useEffect, useState } from "react";
 import "./Products.css";
 import Navbar from "./Navbar";
 import API_URL from "../api";
+
 function Products() {
-
-    // =========================
-    // STATES
-    // =========================
-
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
-
     const [selectedCategory, setSelectedCategory] = useState("All");
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-
     const [wishlistIds, setWishlistIds] = useState(new Set());
     const [toast, setToast] = useState(null);
 
     const fallbackImage = "https://placehold.co/300x200?text=No+Image";
 
-
-    // =========================
-    // TOAST
-    // =========================
-
     const showToast = (message, image = null, name = null) => {
-
-        setToast({
-            message,
-            image,
-            name
-        });
-
-        setTimeout(() => {
-            setToast(null);
-        }, 2500);
+        setToast({ message, image, name });
+        setTimeout(() => setToast(null), 2500);
     };
-
-
-    // =========================
-    // GET PRODUCTS
-    // =========================
 
     const getProducts = async () => {
-
         try {
-
-            const response = await fetch(
-                `${API_URL}/auth/user/product`,
-                {
-                    credentials: "include"
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Failed to get products");
-            }
+            const response = await fetch(`${API_URL}/auth/user/product`, {
+                credentials: "include"
+            });
 
             const data = await response.json();
 
-            if (data.product) {
-                setProducts(data.product);
-            } else {
-                setProducts([]);
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to load products");
             }
 
-        } catch (error) {
+            const productList = Array.isArray(data.product)
+                ? data.product
+                : Array.isArray(data.products)
+                    ? data.products
+                    : [];
 
-            console.error("Product error:", error);
-            setError("Unable to load products");
-
+            setProducts(productList);
+            setError("");
+        } catch (err) {
+            console.error("Product error:", err);
+            setProducts([]);
+            setError(err.message || "Unable to load products");
         }
     };
-
-
-    // =========================
-    // GET CATEGORIES
-    // =========================
 
     const getCategories = async () => {
-
         try {
-
-            const response = await fetch(
-                `${API_URL}/auth/user/category`,
-                {
-                    credentials: "include"
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Failed to get categories");
-            }
+            const response = await fetch(`${API_URL}/auth/user/category`, {
+                credentials: "include"
+            });
 
             const data = await response.json();
 
-            if (data.category) {
-                setCategories(data.category);
-            } else {
-                setCategories([]);
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to load categories");
             }
 
-        } catch (error) {
-
-            console.error("Category error:", error);
-
+            setCategories(Array.isArray(data.category) ? data.category : []);
+        } catch (err) {
+            console.error("Category error:", err);
         }
     };
-
-
-    // =========================
-    // GET WISHLIST
-    // =========================
 
     const getWishlist = async () => {
-
         try {
-
-            const response = await fetch(
-                `${API_URL}/auth/user/wishlist`,
-                {
-                    credentials: "include"
-                }
-            );
+            const response = await fetch(`${API_URL}/auth/user/wishlist`, {
+                credentials: "include"
+            });
 
             if (!response.ok) {
-                throw new Error("Failed to get wishlist");
+                throw new Error("Failed to load wishlist");
             }
 
             const data = await response.json();
 
-            if (
-                data.wishlist &&
-                Array.isArray(data.wishlist.product)
-            ) {
-
-                const ids = data.wishlist.product.map((product) => {
-
-                    if (product && typeof product === "object") {
-                        return String(product._id);
-                    }
-
-                    return String(product);
-
-                });
+            if (data.wishlist && Array.isArray(data.wishlist.product)) {
+                const ids = data.wishlist.product.map((product) =>
+                    String(
+                        product && typeof product === "object"
+                            ? product._id
+                            : product
+                    )
+                );
 
                 setWishlistIds(new Set(ids));
-
             } else {
-
                 setWishlistIds(new Set());
-
             }
-
-        } catch (error) {
-
-            console.error("Wishlist error:", error);
+        } catch (err) {
+            console.error("Wishlist error:", err);
             setWishlistIds(new Set());
-
         }
     };
 
-
-    // =========================
-    // LOAD DATA
-    // =========================
-
     useEffect(() => {
-
         const loadData = async () => {
-
             setLoading(true);
 
             await Promise.all([
@@ -181,37 +107,21 @@ function Products() {
             ]);
 
             setLoading(false);
-
         };
 
         loadData();
-
     }, []);
 
-
-    // =========================
-    // CATEGORY FILTER
-    // =========================
-
     const filterCategory = (categoryId) => {
-
         setSelectedCategory(String(categoryId));
-
     };
 
-
-    // =========================
-    // WISHLIST TOGGLE
-    // =========================
-
     const toggleWishlist = async (product) => {
-
         const productId = String(product._id);
         const isWishlisted = wishlistIds.has(productId);
         const productImage = product.photo || product.image || fallbackImage;
 
         try {
-
             const response = await fetch(
                 `${API_URL}/auth/user/wishlist/${productId}`,
                 {
@@ -226,7 +136,6 @@ function Products() {
             }
 
             setWishlistIds((previous) => {
-
                 const next = new Set(previous);
 
                 if (isWishlisted) {
@@ -236,130 +145,73 @@ function Products() {
                 }
 
                 return next;
-
             });
 
             showToast(
-                isWishlisted
-                    ? "Removed from wishlist"
-                    : "Added to wishlist",
+                isWishlisted ? "Removed from wishlist" : "Added to wishlist",
                 productImage,
                 product.name
             );
-
-        } catch (error) {
-
-            console.error("Wishlist error:", error);
+        } catch (err) {
+            console.error("Wishlist error:", err);
             showToast("Something went wrong");
-
         }
     };
 
-
-    // =========================
-    // ADD TO CART
-    // =========================
-
     const addToCart = async (product) => {
-
         const productImage = product.photo || product.image || fallbackImage;
 
         try {
-
-            const response = await fetch(
-                `${API_URL}/auth/user/cart`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({
-                        productid: String(product._id),
-                        quantity: 1
-                    })
-                }
-            );
+            const response = await fetch(`${API_URL}/auth/user/cart`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    productid: String(product._id),
+                    quantity: 1
+                })
+            });
 
             if (!response.ok) {
                 showToast("Unable to add to cart");
                 return;
             }
 
-            showToast(
-                "Added to cart",
-                productImage,
-                product.name
-            );
-
-        } catch (error) {
-
-            console.error("Cart error:", error);
+            showToast("Added to cart", productImage, product.name);
+        } catch (err) {
+            console.error("Cart error:", err);
             showToast("Something went wrong");
-
         }
     };
-
-
-    // =========================
-    // FILTER PRODUCTS
-    // =========================
 
     const filteredProducts =
         selectedCategory === "All"
             ? products
             : products.filter((item) => {
-
                 if (item.category && typeof item.category === "object") {
-                    return (
-                        String(item.category._id) === String(selectedCategory)
-                    );
+                    return String(item.category._id) === selectedCategory;
                 }
 
-                return (
-                    String(item.category) === String(selectedCategory)
-                );
-
+                return String(item.category) === selectedCategory;
             });
 
-
-    // =========================
-    // LOADING
-    // =========================
-
     if (loading) {
-
         return (
             <div className="products-page">
                 <Navbar />
-                <div className="loading">
-                    Loading products...
-                </div>
+                <div className="loading">Loading products...</div>
             </div>
         );
-
     }
 
-
-    // =========================
-    // MAIN UI
-    // =========================
-
     return (
-
         <div className="products-page">
-
             <Navbar />
 
-
-            {/* =========================
-                TOAST
-            ========================= */}
-
             {toast && (
-
                 <div className="toast">
-
                     {toast.image && (
                         <img
                             src={toast.image}
@@ -382,15 +234,8 @@ function Products() {
                     >
                         ×
                     </button>
-
                 </div>
-
             )}
-
-
-            {/* =========================
-                HEADER
-            ========================= */}
 
             <div className="products-header">
                 <div>
@@ -399,13 +244,7 @@ function Products() {
                 </div>
             </div>
 
-
-            {/* =========================
-                CATEGORY
-            ========================= */}
-
             <div className="category-container">
-
                 <button
                     className={
                         selectedCategory === "All"
@@ -430,51 +269,28 @@ function Products() {
                         {cat.name}
                     </button>
                 ))}
-
             </div>
 
-
-            {/* =========================
-                ERROR
-            ========================= */}
-
             {error && <div className="error">{error}</div>}
-
-
-            {/* =========================
-                PRODUCT COUNT
-            ========================= */}
 
             <div className="product-count">
                 {filteredProducts.length} products
             </div>
 
-
-            {/* =========================
-                PRODUCTS
-            ========================= */}
-
             {filteredProducts.length === 0 ? (
-
                 <div className="no-products">
                     <h2>No products found</h2>
-                    <p>There are no products in this category.</p>
+                    <p>{error || "There are no products in this category."}</p>
                 </div>
-
             ) : (
-
                 <div className="product-grid">
-
                     {filteredProducts.map((item) => {
-
                         const isWishlisted = wishlistIds.has(String(item._id));
-                        const productImage = item.photo || item.image || fallbackImage;
+                        const productImage =
+                            item.photo || item.image || fallbackImage;
 
                         return (
-
                             <div className="product-card" key={item._id}>
-
-                                {/* IMAGE */}
                                 <div className="product-image">
                                     <img
                                         src={productImage}
@@ -485,10 +301,11 @@ function Products() {
                                     />
                                 </div>
 
-                                {/* DETAILS */}
                                 <div className="product-details">
                                     <h2>{item.name}</h2>
-                                    <p className="description">{item.description}</p>
+                                    <p className="description">
+                                        {item.description}
+                                    </p>
 
                                     <div className="product-bottom">
                                         <span className="price">
@@ -521,21 +338,13 @@ function Products() {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         );
-
                     })}
-
                 </div>
-
             )}
-
         </div>
-
     );
-
 }
 
 export default Products;
